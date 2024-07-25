@@ -1,19 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import { Golbalval } from './App';
 
 export default function Todolist() {
-  const todoarr = useContext(Golbalval);
-  const todoarray=todoarr.todoarr;
- const Deletetodo=(val)=>
- {
-    console.log(todoarray)
-    todoarray.splice(val, 1);
-    console.log(val)
-    console.log(todoarray)
- }
- 
+  const { todos, addTodo, removeTodo } = useContext(Golbalval);
+  const [newTodo, setNewTodo] = useState('');
+
+  const handleAddTodo = () => 
+    {
+      addTodo(newTodo);
+      setNewTodo('');
+    };
+
   return (
     <div className="container">
+          <div className='text-center'>
+          <h1>To-Do List</h1>
+            <input
+              type="text"
+              value={newTodo}
+              onChange={(e) => setNewTodo(e.target.value)}
+            />
+            <button onClick={handleAddTodo}>Add Todo</button>
+          </div>
+      
       <table className="table">
         <thead>
           <tr>
@@ -22,12 +31,12 @@ export default function Todolist() {
           </tr>
         </thead>
         <tbody>
-          {todoarray.length > 0 ? (
-            todoarray.map((todo, index) => (
+          {todos.length > 0 ? (
+            todos.map((todo, index) => (
               <tr key={index}>
                 <td>{todo}</td>
                 <td>
-                  <button onClick={() => Deletetodo(`${index}`)}>Delete</button>
+                <button onClick={() => removeTodo(index)}>Remove</button>
                 </td>
               </tr>
             ))

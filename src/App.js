@@ -13,52 +13,23 @@ export default function App() {
   const[sumval]=useCustomehook(5,5);
   const[color]=useState('red');
   const[name]=useState('shravan');
-  const[inputval,setInputval]=useState('');
-  const[todoarr,setTodoarr]=useState('');
+  const [todos, setTodos] = useState([]);
 
+  const addTodo = (todo) => {
+    setTodos([...todos, todo]);
+  };
 
-  const Inputchange = (event)=>
-  {
-     setInputval(event.target.value);
-  }
-
-  const Addtodo =()=>
-  {
-     if(inputval=='')
-     {
-      alert('Please Enter Somthing')
-     }
-     else
-     {
-      setTodoarr(prevTodos => [...prevTodos, inputval]);
-      setInputval(''); // Clear input field after adding todo
-
-     }
-      
+  const removeTodo = (index) => {
+    setTodos(todos.filter((_, i) => i !== index));
     
-  }
+  };
 
   return (
    
-    <Golbalval.Provider  value={{colorval:color,nameval:name,todoarr:todoarr}}>
+    <Golbalval.Provider  value={{colorval:color,nameval:name,todos, addTodo, removeTodo}}>
        <h1>Hello Shravan</h1>
        <p>Custome Hooks Sum: {sumval}</p>
        <Child/>
-      
-       
-       <div className='container'>
-          <div className='text-center'>
-              <div>
-                <input type="text"
-                 placeholder='Enter Somthing'
-                 value={inputval}
-                 onChange={Inputchange}
-                />
-                <button onClick={Addtodo}>Add Todo</button>
-              </div>
-          </div>
-       </div>
-
        <Todolist/>
        <Asyncawait/>
 
