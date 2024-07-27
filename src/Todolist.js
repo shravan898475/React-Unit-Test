@@ -7,8 +7,16 @@ export default function Todolist() {
 
   const handleAddTodo = () => 
     {
-      addTodo(newTodo);
-      setNewTodo('');
+      if(newTodo=='')
+      {
+        alert('Please enter somthing')
+      }
+      else
+      {
+        addTodo(newTodo);
+        setNewTodo('');
+      }
+     
     };
 
   return (

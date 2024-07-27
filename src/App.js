@@ -4,6 +4,9 @@ import { createContext } from 'react';
 import Child from './Child';
 import Todolist from './Todolist';
 import Asyncawait from './Async_Await';
+import ParentA from './ParentA';
+import ParentB from './ParentB';
+
 
 export const Golbalval=createContext();
 
@@ -14,6 +17,7 @@ export default function App() {
   const[color]=useState('red');
   const[name]=useState('shravan');
   const [todos, setTodos] = useState([]);
+  const[Parentdata,setParent]=useState([])
 
   const addTodo = (todo) => {
     setTodos([...todos, todo]);
@@ -26,12 +30,14 @@ export default function App() {
 
   return (
    
-    <Golbalval.Provider  value={{colorval:color,nameval:name,todos, addTodo, removeTodo}}>
+    <Golbalval.Provider  value={{colorval:color,nameval:name,todos, addTodo, removeTodo,setParent,Parentdata}}>
        <h1>Hello Shravan</h1>
        <p>Custome Hooks Sum: {sumval}</p>
        <Child/>
        <Todolist/>
        <Asyncawait/>
+       <ParentA/>
+       <ParentB/>
 
     </Golbalval.Provider>
      
